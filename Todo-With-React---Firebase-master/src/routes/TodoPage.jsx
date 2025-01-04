@@ -11,6 +11,18 @@ const TodoPage = () => {
   const [mode, setMode] = useState("add"); // 'view', 'add', 'edit'
   const [currentTodo, setCurrentTodo] = useState(null); //Selected to array
 
+  //* Get All Todo
+  useEffect(()=>{
+    async function getData(){
+      const response = await fetch('https://passing-macaw-dev-aayan-4252cf2e.koyeb.app/api/v1/todo')
+      const json = await response.json()
+      console.log(json)
+      setTodos(json.data)
+    }
+
+    getData()
+  } , [])
+
   //* Add Todo
   const handleAddTodo = async (todoText) => {
     setIsLoading(true);
